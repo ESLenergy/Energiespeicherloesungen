@@ -1,8 +1,6 @@
 /* ESL Energy – Stylesheet
    Grüntöne in Hell und Dunkel. Dunkel folgt der Systemeinstellung,
    der Schalter oben rechts überschreibt sie (data-theme auf <html>). */
-   Farben: Schiefer, Fensterladen-Grün und Kalkweiß aus den bergischen Häusern,
-   Signalgelb nur für den Rechner und den Hauptbutton. */
 
 @font-face {
   font-family: "Archivo";
