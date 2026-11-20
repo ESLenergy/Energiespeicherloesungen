@@ -123,8 +123,8 @@ svg { flex-shrink: 0; }
   color: var(--text); text-decoration: none; white-space: nowrap;
 }
 .marke svg { width: 2rem; color: var(--akzent); }
-.marke-ladung { transform-origin: 6px 12px; animation: ladung 4s ease-in-out infinite; }
-@keyframes ladung { 0% { transform: scaleX(0.2); } 60%, 100% { transform: scaleX(1); } }
+.marke-ladung { transform-origin: 6px 12px; animation: ladung 6s ease-in-out infinite; }
+@keyframes ladung { 0%, 100% { transform: scaleX(0.12); } 50% { transform: scaleX(1); } }
 
 .nav { display: flex; align-items: center; gap: 0.25rem; }
 .nav a {

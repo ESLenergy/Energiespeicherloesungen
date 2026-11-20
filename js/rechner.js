@@ -4,8 +4,8 @@
   var PACHT_FEST = 1500;      // Modell Fest: € pro Speicher und Jahr, ohne Gewinnanteil
   var PACHT_PLUS = 750;       // Modell Plus: € pro Speicher und Jahr
   var ANTEIL = 0.15;          // Modell Plus: Anteil am Gewinn
-  var GEWINN_MIN = 8000;      // erwarteter Gewinn je Speicher und Jahr (Annahme)
-  var GEWINN_MAX = 14000;
+  var GEWINN_MIN = 4000;      // erwarteter Gewinn je Speicher und Jahr (Annahme)
+  var GEWINN_MAX = 8000;
   var MIN_KW = PACK_KW;       // ab einem Speicher
   var VERMITTLUNG_KW = 750;   // ab hier zusätzlich Vermittlung an Partner
 
