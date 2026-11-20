@@ -281,10 +281,11 @@ svg { flex-shrink: 0; }
   background:
     repeating-linear-gradient(90deg, transparent 0 calc(25% - 4px), var(--flaeche) calc(25% - 4px) 25%),
     linear-gradient(90deg, var(--akzent), var(--akzent-2));
-  transform-origin: 0 50%;
-  animation: fuellen 5s cubic-bezier(.6, 0, .3, 1) infinite;
+  /* Ladestand = genutzter Anteil am Anschluss (--genutzt am .akku) */
+  clip-path: inset(0 calc(100% - var(--genutzt, 50%)) 0 0 round 10px);
+  animation: fuellen 2.4s cubic-bezier(.6, 0, .3, 1) 0.3s both;
 }
-@keyframes fuellen { 0% { transform: scaleX(0.08); } 55%, 85% { transform: scaleX(1); } 100% { transform: scaleX(0.08); } }
+@keyframes fuellen { from { clip-path: inset(0 100% 0 0 round 10px); } }
 .akku-blitz {
   position: absolute; inset: 0; margin: auto; width: 2.75rem; height: 2.75rem;
   color: var(--text); filter: drop-shadow(0 2px 6px var(--glow));
@@ -293,8 +294,8 @@ svg { flex-shrink: 0; }
 @keyframes pulsieren { 50% { transform: scale(1.12); } }
 .akku-titel { font-weight: 700; margin-bottom: 0.75rem; }
 .balken { display: flex; height: 0.85rem; border-radius: 999px; overflow: hidden; background: var(--bg-tief); }
-.balken-genutzt { width: 56.25%; background: var(--text-2); opacity: 0.55; }
-.balken-frei { width: 43.75%; background: linear-gradient(90deg, var(--akzent), var(--akzent-2)); }
+.balken-genutzt { width: var(--genutzt, 50%); background: var(--text-2); opacity: 0.55; }
+.balken-frei { width: calc(100% - var(--genutzt, 50%)); background: linear-gradient(90deg, var(--akzent), var(--akzent-2)); }
 .balken-legende { display: flex; justify-content: space-between; margin: 0.6rem 0 1rem; font-size: var(--s-1); }
 .balken-legende div { display: flex; flex-direction: column; }
 .balken-legende div:last-child { text-align: right; color: var(--akzent); }
