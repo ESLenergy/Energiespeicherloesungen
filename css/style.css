@@ -359,7 +359,7 @@ svg { flex-shrink: 0; }
 .kurve-achse { stroke: var(--linie); stroke-width: 2; }
 .kurve text { fill: var(--text-2); font-size: 13px; font-family: inherit; }
 .kurve .kurve-marke { fill: var(--text); font-weight: 700; }
-.kurve-linie { stroke-dasharray: 700; stroke-dashoffset: 700; transition: stroke-dashoffset 2.2s cubic-bezier(.6, 0, .3, 1) 0.2s; }
+.kurve-linie { stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 2.2s cubic-bezier(.6, 0, .3, 1) 0.2s; }
 .kurve-flaeche { opacity: 0; transition: opacity 1s 1.6s; }
 .kurve.sichtbar .kurve-linie { stroke-dashoffset: 0; }
 .kurve.sichtbar .kurve-flaeche { opacity: 1; }
