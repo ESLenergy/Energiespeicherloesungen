@@ -6,8 +6,7 @@
   var ANTEIL = 0.15;          // Modell Plus: Anteil am Gewinn
   var GEWINN_MIN = 8000;      // erwarteter Gewinn je Speicher und Jahr (Annahme)
   var GEWINN_MAX = 14000;
-  var MIN_KW = 250;           // ab hier eigener Standort (2 Speicher)
-  var MAX_PACKS = 4;          // mehr stellen wir an einem Standort nicht selbst auf
+  var MIN_KW = PACK_KW;       // ab einem Speicher
   var VERMITTLUNG_KW = 750;   // ab hier zusätzlich Vermittlung an Partner
 
   var feld = document.getElementById("kw");
@@ -23,14 +22,14 @@
 
     if (kw < MIN_KW) {
       ausgabe.innerHTML =
-        '<p class="ergebnis-titel">Knapp unter unserer Mindestgröße</p>' +
-        "<p>Für einen eigenen Standort brauchen wir etwa " + MIN_KW +
+        '<p class="ergebnis-titel">Noch unter einem Speicher</p>' +
+        "<p>Für einen Speicher brauchen wir etwa " + MIN_KW +
         " kW freie Leistung. Oft ist die Reserve größer, als die Rechnung auf den ersten Blick zeigt. Wir prüfen das gern kostenlos.</p>" +
         '<a class="button" href="#kontakt">Trotzdem prüfen lassen</a>';
       return;
     }
 
-    var packs = Math.min(MAX_PACKS, Math.floor(kw / PACK_KW));
+    var packs = Math.floor(kw / PACK_KW);
     var fest = packs * PACHT_FEST;
     var plusPacht = packs * PACHT_PLUS;
     var plusMin = plusPacht + rund(packs * GEWINN_MIN * ANTEIL);
@@ -54,7 +53,7 @@
     if (kw >= VERMITTLUNG_KW) {
       html +=
         "<p>Bei " + euro.format(kw) +
-        " kW freier Leistung lohnt sich auch ein größerer Speicher. Dafür bringen wir Sie mit Partnern zusammen und vergleichen beide Wege mit Ihnen.</p>";
+        " kW freier Leistung kann sich auch ein großer Speicher lohnen. Dafür bringen wir Sie zusätzlich mit Partnern zusammen und vergleichen beide Wege mit Ihnen.</p>";
     }
 
     html +=

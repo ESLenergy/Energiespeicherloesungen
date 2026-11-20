@@ -50,7 +50,7 @@
     <div class="wrap hero-inhalt">
       <div>
         <p class="kicker zeige">Rhein-Ruhr &amp; Umland</p>
-        <h1 class="zeige">Ihr Netz&shy;anschluss hat Reserve. <em>Wir machen daraus Pacht.</em></h1>
+        <h1 class="zeige">Ihr Netz&shy;anschluss hat Reserve. <em>Wir erzeugen daraus Einnahmen.</em></h1>
         <p class="lead zeige">Viele Betriebe haben einen Anschluss, der für mehr Produktion ausgelegt ist, als heute läuft. Wir stellen dort einen eigenen Batteriespeicher auf und zahlen Ihnen dafür jedes Jahr Pacht plus einen Anteil am Gewinn.</p>
         <div class="hero-aktion zeige">
           <a class="button" href="#kontakt">Kostenlosen Standort-Check anfragen</a>
@@ -60,8 +60,11 @@
 
       <figure class="akku zeige" style="--genutzt: 56.25%" aria-label="Beispiel: Netzanschluss mit 800 kW, davon 450 kW genutzt und 350 kW frei">
         <div class="akku-koerper" aria-hidden="true">
-          <div class="akku-fuellung"></div>
-          <svg class="akku-blitz" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor"/></svg>
+          <div class="akku-fuellung">
+            <div class="akku-genutzt"></div>
+            <div class="akku-frei"></div>
+            <div class="akku-frei-bereich"><svg class="akku-blitz" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor"/></svg></div>
+          </div>
         </div>
         <figcaption>
           <p class="akku-titel">Beispiel: Metallbetrieb mit 800 kW Anschluss</p>
@@ -83,7 +86,7 @@
         <div class="zeige"><dt><span data-zaehle="1500">1.500</span> €</dt><dd>feste Pacht pro Speicher und Jahr</dd></div>
         <div class="zeige"><dt><span data-zaehle="15">15</span> %</dt><dd>Gewinnanteil im Modell Plus</dd></div>
         <div class="zeige"><dt><span data-zaehle="0">0</span> €</dt><dd>Investition für Sie</dd></div>
-        <div class="zeige"><dt><span data-zaehle="12">12</span> Jahre</dt><dd>planbare Einnahmen</dd></div>
+        <div class="zeige"><dt><span data-zaehle="10">10</span> Jahre</dt><dd>planbare Laufzeit und Einnahmen</dd></div>
       </dl>
     </div>
   </section>
@@ -112,7 +115,7 @@
         <article class="karte zeige">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="7" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="5" width="7" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           <h3>Wenig Platz</h3>
-          <p>Zwei Outdoor-Schränke, nahe am Trafo oder an der Hauptverteilung. Meist reicht eine Ecke, die heute niemand nutzt.</p>
+          <p>Jede Speichereinheit braucht nur etwa 2 m², möglichst nah am Trafo oder an der Hauptverteilung. Meist reicht eine Ecke, die heute niemand nutzt.</p>
         </article>
         <article class="karte zeige">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -136,7 +139,7 @@
         <p class="lead zeige">Der Strompreis schwankt jeden Tag stark. Mittags, wenn viel Solarstrom im Netz ist, ist er oft fast null, abends steigt er wieder. Der Speicher nutzt genau diesen Unterschied, vollautomatisch und über einen eigenen Zähler.</p>
         <ol class="prinzip-schritte">
           <li class="zeige"><b>Laden</b> wenn Strom im Überfluss da ist und wenig kostet</li>
-          <li class="zeige"><b>Speichern</b> für ein paar Stunden im Schrank auf Ihrem Gelände</li>
+          <li class="zeige"><b>Speichern</b> im Batteriespeicher</li>
           <li class="zeige"><b>Abgeben</b> wenn Strom knapp und teuer ist</li>
         </ol>
       </div>
@@ -169,12 +172,12 @@
         <li class="zeige">
           <span class="ablauf-nr">1</span>
           <h3>Check</h3>
-          <p>Wir prüfen kostenlos, ob Ihr Anschluss genug Reserve hat und ob nahe am Trafo oder an der Hauptverteilung Platz für die Schränke ist.</p>
+          <p>Wir prüfen kostenlos, ob Ihr Anschluss genug Reserve hat und ob nahe am Trafo oder an der Hauptverteilung Platz für die Speichereinheiten ist.</p>
         </li>
         <li class="zeige">
           <span class="ablauf-nr">2</span>
           <h3>Vertrag</h3>
-          <p>Sie verpachten uns die Fläche für mindestens 12 Jahre. Sie wählen Festpacht oder Pacht plus Gewinnanteil, beides steht im Vertrag, der Speicher wird im Grundbuch abgesichert.</p>
+          <p>Sie verpachten uns die Fläche für mindestens 10 Jahre. Sie wählen Festpacht oder Pacht plus Gewinnanteil, beides steht im Vertrag, der Speicher wird im Grundbuch abgesichert.</p>
         </li>
         <li class="zeige">
           <span class="ablauf-nr">3</span>
@@ -207,7 +210,7 @@
         </div>
         <div class="ergebnis" id="ergebnis" aria-live="polite"></div>
       </div>
-      <p class="voraussetzung zeige">Voraussetzungen: freie Anschlussleistung ab etwa 250 kW, Platz für zwei Schränke, Standort im Rhein-Ruhr-Gebiet oder Umland. Ab 750 kW bringen wir Sie zusätzlich mit Partnern zusammen, die größere Speicher bauen.</p>
+      <p class="voraussetzung zeige">Voraussetzungen: freie Anschlussleistung ab etwa 125 kW, etwa 2 m² Platz pro Speichereinheit, Standort im Rhein-Ruhr-Gebiet oder Umland. Ab 750 kW bringen wir Sie zusätzlich mit Partnern zusammen, die größere Speicher bauen.</p>
     </div>
   </section>
 
@@ -299,11 +302,11 @@
         </details>
         <details class="zeige">
           <summary>Wie viel Platz braucht der Speicher?</summary>
-          <p>Ein Speicher mit 125 kW passt in einen Outdoor-Schrank. Im Normalfall stellen wir zwei Schränke auf, möglichst nah am Trafo oder an der Hauptverteilung, damit die Kabelwege kurz bleiben.</p>
+          <p>Jede Speichereinheit mit 125 kW braucht etwa 2 m². Wie viel Fläche am Ende genau gebraucht wird, klären wir in der Planung. Wir stellen die Einheiten möglichst nah an den Trafo oder die Hauptverteilung, damit die Kabelwege kurz bleiben.</p>
         </details>
         <details class="zeige">
           <summary>Wie lange läuft der Vertrag?</summary>
-          <p>Mindestens 12 Jahre. Der Speicher wird mit einer Dienstbarkeit im Grundbuch abgesichert, damit er auch bei einem Verkauf des Grundstücks bleiben kann. Am Ende bauen wir ihn auf unsere Kosten zurück.</p>
+          <p>Mindestens 10 Jahre. Der Speicher wird mit einer Dienstbarkeit im Grundbuch abgesichert, damit er auch bei einem Verkauf des Grundstücks bleiben kann. Am Ende bauen wir ihn auf unsere Kosten zurück.</p>
         </details>
         <details class="zeige">
           <summary>Wer kümmert sich um den Netzbetreiber?</summary>
