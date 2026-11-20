@@ -1,10 +1,14 @@
-// Rechner: freie Anschlussleistung -> Anzahl Speicher und feste Pacht
+// Rechner: freie Anschlussleistung -> Anzahl Speicher, Festpacht oder Pacht plus Gewinnanteil
 (function () {
-  var PACK_KW = 125;        // Leistung je Speicher
-  var PACHT = 750;          // € pro Speicher und Jahr
-  var MIN_KW = 250;         // ab hier eigener Standort (2 Speicher)
-  var MAX_PACKS = 4;        // mehr stellen wir an einem Standort nicht selbst auf
-  var VERMITTLUNG_KW = 750; // ab hier zusätzlich Vermittlung an Partner
+  var PACK_KW = 125;          // Leistung je Speicher
+  var PACHT_FEST = 1500;      // Modell Fest: € pro Speicher und Jahr, ohne Gewinnanteil
+  var PACHT_PLUS = 750;       // Modell Plus: € pro Speicher und Jahr
+  var ANTEIL = 0.15;          // Modell Plus: Anteil am Gewinn
+  var GEWINN_MIN = 8000;      // erwarteter Gewinn je Speicher und Jahr (Annahme)
+  var GEWINN_MAX = 14000;
+  var MIN_KW = 250;           // ab hier eigener Standort (2 Speicher)
+  var MAX_PACKS = 4;          // mehr stellen wir an einem Standort nicht selbst auf
+  var VERMITTLUNG_KW = 750;   // ab hier zusätzlich Vermittlung an Partner
 
   var feld = document.getElementById("kw");
   var regler = document.getElementById("kw-regler");
@@ -12,6 +16,7 @@
   if (!feld || !regler || !ausgabe) return;
 
   var euro = new Intl.NumberFormat("de-DE", { maximumFractionDigits: 0 });
+  function rund(x) { return Math.round(x / 50) * 50; }
 
   function zeigen(kw) {
     if (!isFinite(kw) || kw < 0) kw = 0;
@@ -19,18 +24,32 @@
     if (kw < MIN_KW) {
       ausgabe.innerHTML =
         '<p class="ergebnis-titel">Knapp unter unserer Mindestgröße</p>' +
-        "<p>Für einen eigenen Speicher brauchen wir etwa " + MIN_KW +
+        "<p>Für einen eigenen Standort brauchen wir etwa " + MIN_KW +
         " kW freie Leistung. Oft ist die Reserve größer, als die Rechnung auf den ersten Blick zeigt. Wir prüfen das gern kostenlos.</p>" +
         '<a class="button" href="#kontakt">Trotzdem prüfen lassen</a>';
       return;
     }
 
     var packs = Math.min(MAX_PACKS, Math.floor(kw / PACK_KW));
-    var pacht = packs * PACHT;
+    var fest = packs * PACHT_FEST;
+    var plusPacht = packs * PACHT_PLUS;
+    var plusMin = plusPacht + rund(packs * GEWINN_MIN * ANTEIL);
+    var plusMax = plusPacht + rund(packs * GEWINN_MAX * ANTEIL);
+
     var html =
       '<p class="ergebnis-titel">Platz für ' + packs + " Speicher mit je " + PACK_KW + " kW</p>" +
-      '<p class="ergebnis-betrag">' + euro.format(pacht) + " €</p>" +
-      "<p>feste Pacht im Jahr, dazu 15 % des Gewinns, den die Speicher an Ihrem Standort machen.</p>";
+      '<div class="modelle">' +
+        '<div class="modell">' +
+          '<p class="modell-name">Modell Fest</p>' +
+          '<p class="modell-betrag">' + euro.format(fest) + "\u00a0€</p>" +
+          "<p>im Jahr, fest vereinbart. " + euro.format(PACHT_FEST) + "\u00a0€ pro Speicher, ohne Gewinnanteil.</p>" +
+        "</div>" +
+        '<div class="modell">' +
+          '<p class="modell-name">Modell Plus</p>' +
+          '<p class="modell-betrag">' + euro.format(plusMin) + "–" + euro.format(plusMax) + "\u00a0€</p>" +
+          "<p>im Jahr erwartet. Davon " + euro.format(plusPacht) + "\u00a0€ feste Pacht, dazu 15 % des Gewinns.</p>" +
+        "</div>" +
+      "</div>";
 
     if (kw >= VERMITTLUNG_KW) {
       html +=
@@ -39,7 +58,9 @@
     }
 
     html +=
-      '<p class="klein">Grobe Einschätzung. Ob der Netzbetreiber zustimmt und genug Fläche da ist, klären wir im Standort-Check.</p>';
+      '<p class="klein">Grobe Einschätzung. Der Gewinnanteil beruht auf unserer Erwartung von ' +
+      euro.format(GEWINN_MIN) + " bis " + euro.format(GEWINN_MAX) +
+      " € Gewinn pro Speicher und Jahr und ist nicht garantiert. Ob der Netzbetreiber zustimmt und genug Fläche da ist, klären wir im Standort-Check.</p>";
     ausgabe.innerHTML = html;
   }
 

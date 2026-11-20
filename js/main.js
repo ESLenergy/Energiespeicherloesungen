@@ -6,10 +6,8 @@
 
   // ---------- Hell / Dunkel ----------
   var schalter = document.querySelector(".thema");
-  function istDunkel() {
-    if (root.dataset.theme) return root.dataset.theme === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  }
+  // Standard ist hell, dunkel nur nach eigener Wahl
+  function istDunkel() { return root.dataset.theme === "dark"; }
   if (schalter) {
     schalter.addEventListener("click", function () {
       var neu = istDunkel() ? "light" : "dark";
@@ -108,6 +106,31 @@
     zeigen.forEach(function (el) { beob.observe(el); });
   } else {
     zeigen.forEach(function (el) { el.classList.add("sichtbar"); });
+  }
+
+  // ---------- Anfrageformular: öffnet das E-Mail-Programm ----------
+  var formular = document.getElementById("formular");
+  if (formular) {
+    formular.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var f = formular.elements;
+      var fehler = formular.querySelector(".formular-fehler");
+      var name = f.name.value.trim();
+      if (!name) { fehler.hidden = false; f.name.focus(); return; }
+      fehler.hidden = true;
+      var zeilen = [
+        "Name: " + name,
+        "Firma: " + f.firma.value.trim(),
+        "Telefon: " + f.telefon.value.trim(),
+        "Ort des Betriebs: " + f.ort.value.trim(),
+        "Freie Anschlussleistung: " + f.kw.value.trim(),
+        "",
+        f.nachricht.value.trim()
+      ];
+      var betreff = "Standort-Check" + (f.firma.value.trim() ? ": " + f.firma.value.trim() : "");
+      window.location.href = "mailto:info@esl.energy?subject=" + encodeURIComponent(betreff) +
+        "&body=" + encodeURIComponent(zeilen.join("\n"));
+    });
   }
 
   // ---------- Lichtschein auf Karten folgt der Maus ----------

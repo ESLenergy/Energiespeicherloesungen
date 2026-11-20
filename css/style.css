@@ -1,6 +1,6 @@
 /* ESL Energy – Stylesheet
-   Grüntöne in Hell und Dunkel. Dunkel folgt der Systemeinstellung,
-   der Schalter oben rechts überschreibt sie (data-theme auf <html>). */
+   Grüntöne in Hell und Dunkel. Standard ist hell, dunkel über den
+   Schalter oben rechts (data-theme="dark" auf <html>). */
 
 @font-face {
   font-family: "Archivo";
@@ -10,7 +10,7 @@
   font-display: swap;
 }
 
-/* ---------- Farben ---------- */
+/* ---------- Farben (Standard hell) ---------- */
 :root {
   --bg: #f2f8f4;
   --bg-tief: #e4f0e8;
@@ -29,25 +29,6 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #06120c;
-    --bg-tief: #0a1b13;
-    --flaeche: #0f2419;
-    --text: #e3f3e9;
-    --text-2: #94b5a3;
-    --linie: #1d3a2b;
-    --akzent: #34d399;
-    --akzent-2: #6ee7b7;
-    --akzent-hell: #12382a;
-    --auf-akzent: #052014;
-    --glow: rgba(52, 211, 153, 0.18);
-    --raster: rgba(110, 231, 183, 0.06);
-    --schatten: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
-    --kopf-bg: rgba(6, 18, 12, 0.72);
-    color-scheme: dark;
-  }
-}
 :root[data-theme="dark"] {
   --bg: #06120c;
   --bg-tief: #0a1b13;
@@ -172,10 +153,6 @@ svg { flex-shrink: 0; }
 .thema-mond { display: none; }
 :root[data-theme="dark"] .thema-sonne { display: none; }
 :root[data-theme="dark"] .thema-mond { display: block; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .thema-sonne { display: none; }
-  :root:not([data-theme="light"]) .thema-mond { display: block; }
-}
 
 .menue { display: none; }
 .menue span { display: block; width: 1.1rem; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.3s; grid-area: 1 / 1; }
@@ -184,7 +161,7 @@ svg { flex-shrink: 0; }
 .menue[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
 .menue[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .menue { display: grid; }
   .kopf-aktionen { margin-left: auto; }
   .nav {
@@ -432,8 +409,41 @@ input[type="range"] { width: 100%; margin: 1.5rem 0 1rem; accent-color: var(--ak
 .ergebnis p { color: #d1fae5; }
 .ergebnis .klein { font-size: var(--s-1); opacity: 0.8; margin-top: 0.5rem; }
 .ergebnis .button { align-self: flex-start; background: #34d399; color: #052014; }
+.modelle { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 0.5rem 0 1rem; }
+.modell { padding: 1rem 1.1rem; border-radius: 14px; background: rgba(236, 253, 243, 0.08); border: 1px solid rgba(167, 243, 208, 0.25); }
+.modell p { margin: 0; font-size: var(--s-1); }
+.modell-name { font-weight: 700; color: #6ee7b7 !important; text-transform: uppercase; letter-spacing: 0.06em; }
+.modell-betrag { font-size: clamp(1.6rem, 3.2vw, 2.2rem) !important; font-weight: 800; font-stretch: 112%; color: #fff !important; line-height: 1.15; margin: 0.25rem 0 0.4rem !important; font-variant-numeric: tabular-nums; }
+@media (max-width: 1000px) { .modelle { grid-template-columns: 1fr; } }
 .voraussetzung { margin-top: 1.5rem; color: var(--text-2); font-size: var(--s-1); max-width: 70ch; }
 @media (max-width: 760px) { .rechner { grid-template-columns: 1fr; } }
+
+/* Gebiet */
+.gebiet { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.gebiet-liste { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 0.6rem; }
+.gebiet-liste li { position: relative; padding-left: 1.75rem; }
+.gebiet-liste li::before { content: ""; position: absolute; left: 0; top: 0.45em; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--akzent); box-shadow: 0 0 0 4px var(--akzent-hell); }
+.karte-gebiet { margin: 0; padding: 1rem; border-radius: 24px; background: var(--flaeche); border: 1px solid var(--linie); box-shadow: var(--schatten); color: var(--akzent); }
+.karte-gebiet svg { display: block; width: 100%; height: auto; }
+.karte-gebiet figcaption { font-size: var(--s-1); color: var(--text-2); padding: 0 0.5rem 0.25rem; }
+.umkreis { fill: none; stroke: var(--akzent); stroke-width: 2; stroke-dasharray: 6 8; opacity: 0.55; transform-origin: 416.3px 348px; animation: drehen 60s linear infinite; }
+@keyframes drehen { to { transform: rotate(360deg); } }
+.umkreis-text { fill: var(--akzent); font-size: 14px; font-weight: 700; font-family: inherit; }
+.fluss { fill: none; stroke: #60a5fa; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.45; }
+.fluss-klein { stroke-width: 3; }
+.fluss-text { fill: #3b82f6; opacity: 0.7; font-size: 13px; font-style: italic; font-family: inherit; }
+.ort circle { fill: var(--text-2); }
+.ort text { fill: var(--text); font-size: 15px; font-weight: 600; font-family: inherit; }
+.js .karte-gebiet .ort { opacity: 0; transform: translateY(6px); transition: opacity 0.5s, transform 0.5s; transition-delay: calc(0.4s + var(--i) * 0.06s); }
+.js .karte-gebiet.sichtbar .ort { opacity: 1; transform: none; }
+.heimat-punkt { fill: var(--akzent); stroke: var(--flaeche); stroke-width: 4; }
+.puls { fill: var(--akzent); opacity: 0; transform-origin: 416.3px 348px; animation: puls 2.8s ease-out infinite; }
+.puls-2 { animation-delay: 1.4s; }
+@keyframes puls { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 0; transform: scale(5); } }
+.heimat-schild { fill: var(--text); }
+.heimat-name { fill: var(--bg); font-weight: 800; font-size: 16px; font-family: inherit; }
+.heimat-ort { fill: var(--bg); opacity: 0.75; font-size: 13px; font-family: inherit; }
+@media (max-width: 860px) { .gebiet { grid-template-columns: 1fr; } }
 
 /* Team */
 .team { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 3rem; }
@@ -450,7 +460,16 @@ input[type="range"] { width: 100%; margin: 1.5rem 0 1rem; accent-color: var(--ak
 }
 .person h3 { margin-bottom: 0.25rem; }
 .rolle { color: var(--akzent); font-weight: 600; font-size: var(--s-1); }
-.person p:last-child { color: var(--text-2); margin: 0; }
+.person p:not(.rolle) { color: var(--text-2); }
+.person-kontakt { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.person-kontakt a {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.5rem 0.9rem; border-radius: 999px;
+  border: 1px solid var(--linie); color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--s-1);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.person-kontakt a:hover { border-color: var(--akzent); background: var(--akzent-hell); }
+.person-kontakt svg { width: 1.1rem; height: 1.1rem; color: var(--akzent); }
+.person-kontakt .wa svg, .kontakt-personen .wa svg { color: #25d366; }
 @media (max-width: 760px) { .team { grid-template-columns: 1fr; } .person { flex-direction: column; } }
 
 /* Fragen */
@@ -496,7 +515,33 @@ a.kontakt-zeile:hover { color: #6ee7b7; }
 .kontakt-box .button:hover { background: #6ee7b7; }
 .kontakt-box .button-leise { background: transparent; color: #ecfdf3; border-color: rgba(236, 253, 243, 0.35); }
 .kontakt-box .button-leise:hover { background: rgba(110, 231, 183, 0.15); border-color: #6ee7b7; }
+.kontakt-box { align-items: start; }
+.kontakt-daten { margin-top: 1.5rem; }
+.kontakt-personen { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid rgba(236, 253, 243, 0.18); }
+.kontakt-personen div { display: grid; gap: 0.45rem; align-content: start; }
+.kontakt-personen b { color: #fff; }
+.kontakt-personen a { display: inline-flex; align-items: center; gap: 0.5rem; color: #c6f0da; text-decoration: none; font-weight: 600; }
+.kontakt-personen a:hover { color: #6ee7b7; }
+.kontakt-personen svg { width: 1.1rem; height: 1.1rem; color: #6ee7b7; }
+.formular {
+  display: grid; gap: 0.9rem; padding: clamp(1.25rem, 3vw, 2rem); border-radius: 20px;
+  background: var(--flaeche); color: var(--text); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5);
+}
+.formular-titel { font-weight: 800; font-size: var(--s1); font-stretch: 110%; margin: 0 0 0.25rem; }
+.formular-zeile { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.formular label { display: grid; gap: 0.35rem; font-weight: 600; font-size: var(--s-1); }
+.formular input, .formular textarea {
+  font: inherit; font-size: 1rem; color: var(--text); background: var(--bg);
+  border: 1px solid var(--linie); border-radius: 10px; padding: 0.7rem 0.85rem; width: 100%; min-width: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.formular input:focus, .formular textarea:focus { outline: none; border-color: var(--akzent); box-shadow: 0 0 0 3px var(--akzent-hell); }
+.formular textarea { resize: vertical; }
+.formular .button { justify-self: start; margin-top: 0.25rem; }
+.formular-hinweis { font-size: var(--s-1); color: var(--text-2); margin: 0; }
+.formular-fehler { color: #b91c1c; font-weight: 600; margin: 0; }
 @media (max-width: 860px) { .kontakt-box { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .formular-zeile, .kontakt-personen { grid-template-columns: 1fr; } }
 
 /* ---------- Fuß ---------- */
 .fuss { padding: 2rem 0; border-top: 1px solid var(--linie); color: var(--text-2); font-size: var(--s-1); }
